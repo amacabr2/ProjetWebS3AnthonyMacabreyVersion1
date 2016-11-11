@@ -1,0 +1,40 @@
+{% extends('v_layout.html.twig') %}
+
+{% block contenu %}
+
+    <form class="col-lg-5" method="post" action="{{ path('utilisateur.loginConfirm') }}">
+
+            <fieldset>
+
+                <legend>Identifiez vous</legend>
+
+                <input type="hidden" name="token" value="{% if token is defined %}{{ token }}{% endif %}">
+                {% if erreurs.token is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.token }}</span>
+                    <br><br>
+                {% endif %}
+
+                {% if erreurs.identification is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.identification }}</span>
+                    <br><br>
+                {% endif %}
+
+                <div class="form-group">
+                    <label class="control-label">Login</label>
+                    <input class="form-control" name="login"  type="text"  size="18" />
+                    <br><br>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Mot de passe</label>
+                    <input class="form-control" name="motdepasse"  type="password"  size="18" />
+                    <br><br>
+                </div>
+
+                <input class="btn btn-primary" type="submit" name="Connection" value="Se connecter" />
+
+            </fieldset>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends('v_layout.html.twig') %}
+
+{% block contenu %}
+
+    <div class="row">
+
+        <table class="table table-responsive table-bordered table-striped">
+
+            <caption class="panel-header">Recapitulatifs des clubs</caption>
+
+            <thead>
+                <tr>
+                    <th>Nom du club</th>
+                    <th>Ville</th>
+                    <th>Nombre de joueurs</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for club in clubs if clubs is not empty %}
+                    <tr>
+                        <td><b>{{ club.nomClub }}</b></td>
+                        <td>{{ club.villeClub }}</td>
+                        <td>{{ club.nbrJoueurByClub }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="6" style="text-align: center">Pas de club</td></tr>
+                {% endfor %}
+
+            <tbody>
+
+        </table>
+
+    </div>
+
+
+{% endblock %}

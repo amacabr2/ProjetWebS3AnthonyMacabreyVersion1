@@ -1,0 +1,82 @@
+{% extends('v_layout.html.twig') %}
+
+{% block contenu %}
+
+    <div class="row">
+
+        <div class="col-lg-offset-2 col-lg-8">
+
+            <p>Vous êtes sur le point de retirer un joueur dont voici les caratéristiques :</p>
+
+            <div class="panel panel-primary">
+
+                <table class="table table-responsive table-striped">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Information </h3>
+                    </div>
+
+                    <tbody>
+
+                    {% if data is not empty %}
+                        <tr>
+                            <td>Nom</td>
+                            <td>{{ data.nomJoueur }}</td>
+                        </tr>
+                        <tr>
+                            <td>Prenom</td>
+                            <td>{{ data.prenomJoueur}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date de naissance</td>
+                            <td>{{ data.dateNaissance | date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Club</td>
+                            <td>{{ data.nomClub }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ville</td>
+                            <td>{{ data.villeClub }}</td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-offset-2 col-lg-2">
+
+            <form action="{{ path('joueur.confirmDeleteJoueur')}}" method="post">
+
+                <input type="hidden" name="_method" value="DELETE">
+
+                <input name="idJoueur" type="hidden" value="{{ data.idJoueur }}">
+
+                <input type="hidden" name="token" value="{% if token is defined %}{{ token }}{% endif %}">
+                {% if erreurs.token is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.token }}</span>
+                    <br><br>
+                {% endif %}
+
+                <input type="submit" class="btn btn-danger">
+
+            </form>
+
+        </div>
+
+        <div class="col-lg-2">
+            <a href="{{ path('joueur.show') }}" class="btn btn-primary">Revenir en arrière</a>
+        </div>
+
+    </div>
+
+{% endblock %}

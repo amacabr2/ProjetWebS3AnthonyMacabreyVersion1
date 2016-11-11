@@ -1,0 +1,73 @@
+{% extends('v_layout.html.twig') %}
+
+{% block contenu %}
+
+    <form class="col-lg-5" method="post" action="{{ path('joueur.addJoueur') }}">
+
+        <fieldset>
+
+            <legend>Ajouter un joueur</legend>
+
+            <input type="hidden" name="token" value="{% if token is defined %}{{ token }}{% endif %}">
+            {% if erreurs.token is defined %}
+                <br><span class="small alert alert-danger">{{ erreurs.token }}</span>
+                <br><br>
+            {% endif %}
+
+            <div class="form-group">
+                <label class="control-label">Nom</label>
+                <input class="form-control" name="nomJoueur"  type="text"  size="18"
+                        {% if donnees is defined and erreurs.nomJoueur is not defined %} value="{{ donnees.nomJoueur }} {% endif %}"/>
+                {% if erreurs.nomJoueur is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.nomJoueur }}</span>
+                {% endif %}
+                <br><br>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Prénom</label>
+                <input class="form-control" name="prenomJoueur"  type="text"  size="18"
+                        {% if donnees is defined and erreurs.prenomJoueur is not defined %} value="{{ donnees.prenomJoueur }} {% endif %}"/>
+                {% if erreurs.prenomJoueur is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.prenomJoueur }}</span>
+                {% endif %}
+                <br><br>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Date de naissance</label>
+                <input class="form-control" name="dateNaissance" type="text"
+                        {% if donnees is defined and erreurs.dateNaissance is not defined %} value="{{ donnees.dateNaissance }} {% endif %}"/>
+                {% if erreurs.dateNaissance is defined %}
+                    <br><span class="small alert alert-danger">{{ erreurs.dateNaissance }}</span>
+                {% endif %}
+                <br><br>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Club</label>
+                <select name="idClub" class="form-control">
+                    {% if  donnees.idClub is not defined or donnees.idClub is empty   %}
+                        <option value="">Veuillez sélectionner un club</option>
+                    {% endif %}
+                    {% for club in clubs %}
+                        <option value="{{ club.idClub }}"
+                                {% if donnees.idClub is defined and club.idClub == donnees.idClub %}selected{% endif %}>
+                            {{ club.nomClub }}
+                        </option>
+                    {% endfor %}
+                </select>
+                {% if erreurs.idClub is defined %}
+                    <br><small class="alert alert-danger">{{ erreurs.idClub }}</small>
+                {% endif %}
+                <br><br>
+            </div>
+
+            <input class="btn btn-primary" type="submit" name="CreerProduit" value="Creer" />
+
+        </fieldset>
+
+    </form>
+
+{% endblock %}
+

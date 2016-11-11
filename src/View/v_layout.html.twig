@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/x-icon" href="http://www.iut-bm.univ-fcomte.fr/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>exemple MVC php</title>
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </head>
+
+    <body>
+
+        {% include "v_menu.html.twig" %}
+
+        <div class="container">
+
+            {% block contenu %}
+
+            {% endblock %}
+
+        </div>
+
+        <script src="{{ asset('js/jquery-3.0.0.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/js/dropdown.js') }}"></script>
+
+    </body>
+
+</html>

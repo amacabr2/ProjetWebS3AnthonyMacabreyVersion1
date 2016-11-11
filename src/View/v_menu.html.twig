@@ -1,0 +1,55 @@
+<nav class="navbar navbar-inverse">
+
+    <a class="navbar-brand" href="">Foot en folie</a>
+
+    <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+            <a data-toggle="dropdown" href="#">Joueur <b class="caret"></b></a>
+            {% if app.session.get('droit') is defined and app.session.get('droit') == 'DROITadmin' %}
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('joueur.addJoueur') }}"> ajouter un joueur </a></li>
+                    <li><a href="{{ path('joueur.show') }}">afficher/editer/supprimer un joueur</a></li>
+                </ul>
+            {% else %}
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('joueur.show') }}">afficher un joueur</a></li>
+                </ul>
+            {% endif %}
+        </li>
+        {% if app.session.get('logged') is defined and app.session.get('logged') == 1 %}
+            <li class="dropdown">
+                <a href="{{ path('club.show') }}">Club</a>
+            </li>
+        {% endif %}
+
+    </ul>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-target">
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li class="dropdown">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {% if app.session.get('logged') is defined and app.session.get('logged') == 1 %}
+                        <span class="glyphicon glyphicon-user"></span> {{ app.session.get('login') }} <b class="caret"></b>
+                    {% else %}
+                        <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b>
+                    {% endif %}
+                </a>
+
+                <ul class="dropdown-menu">
+                    {% if app.session.get('logged') is defined and app.session.get('logged') == 1 %}
+                        <li><a href="{{ path('utilisateur.logout') }}">Log out</a></li>
+                    {% else %}
+                        <li><a href="{{ path('utilisateur.login') }}">Log in</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
